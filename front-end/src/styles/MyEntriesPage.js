@@ -22,6 +22,7 @@ const MyEntriesPage = styled.div`
 
     .logout {
         font-size: 24px;
+        cursor: pointer;
     }
 `;
 

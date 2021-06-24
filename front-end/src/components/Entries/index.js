@@ -2,31 +2,22 @@ import { StyledEntries } from './styles';
 import { Entry } from './Entry';
 import { useEffect, useState } from 'react';
 
-const Entries = ({ entries }) => {
+const Entries = ({ data }) => {
 	const [saldo, setSaldo] = useState(0);
 	useEffect(() => {
-		const value =
-			entries.reduce(
-				(acc, cur) =>
-					cur.type === 'income' ? acc + cur.value : acc - cur.value,
-				0
-			) / 100;
+		const value = data.total / 100;
 
 		setSaldo(value);
-	}, [entries]);
+	}, [data]);
 
 	return (
 		<StyledEntries>
-			{!entries[0] ? (
+			{!data.entries[0] ? (
 				<div
+					className="no-entries"
 					style={{
-						flex: 1,
-						display: 'flex',
-						justifyContent: 'center',
 						alignItems: 'center',
-						color: '#868686',
 						fontSize: '20px',
-						width: '180px',
 						alignSelf: 'center',
 						textAlign: 'center',
 						lineHeight: '25px',
@@ -37,7 +28,7 @@ const Entries = ({ entries }) => {
 			) : (
 				<>
 					<div>
-						{entries.map((e, index) => (
+						{data.entries.map((e, index) => (
 							<Entry key={index} data={e} />
 						))}
 					</div>

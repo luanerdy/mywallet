@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '../components/Form';
 import { Input } from '../components/Input';
 import { SubmitButton } from '../components/SubmitButton';
 import { AuthPage } from '../styles/AuthPage';
+import axios from 'axios';
 
 const SignUp = () => {
 	const [disabled, setDisabled] = useState(false);
@@ -11,9 +12,28 @@ const SignUp = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
+	const history = useHistory();
 
-	const handleSubmit = () => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		setDisabled(true);
+		
+		if (password !== passwordConfirm){
+			setDisabled(false);
+			return alert('Digite a mesma senha nos dois campos!');
+		}
+
+		const user = {
+			name,
+			email,
+			password,
+		};
+
+		axios.post('http://localhost:4000/auth/signup', user).then(res => {
+			history.push('/');
+		}).catch(err => {
+			alert("Erro! Tente novamente!");
+		});
 		setDisabled(false);
 	};
 
@@ -36,6 +56,7 @@ const SignUp = () => {
 				/>
 				<Input
 					type="password"
+					minLength="6"
 					required
 					placeholder="Senha"
 					value={password}
@@ -43,6 +64,7 @@ const SignUp = () => {
 				/>
 				<Input
 					type="password"
+					minLength="6"
 					required
 					placeholder="Confirme a senha"
 					value={passwordConfirm}

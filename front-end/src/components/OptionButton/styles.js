@@ -7,6 +7,7 @@ const StyledOptionButton = styled.div`
     height: 110px;
     margin: 15px 0 0;
     border-radius: 5px;
+    cursor: pointer;
 
     background: #A328D6;
     color: white;

@@ -1,6 +1,5 @@
 # MyWallet
 # App para registro de fluxo financeiro
-### Criado na semana 15 do bootcamp Responde Aí
 ## Tecnologias Utilizadas no front-end:
 |HTML|CSS|JavaScript|ReactJS|
 |-|-|-|-|
